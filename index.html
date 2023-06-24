@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>sign in</title>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h2>CREATE ACCOUNT</h2>
+        </div>
+        <form class="form" id="form">
+            <div class="form-box">
+                <label>User name</label>
+                <input type="text" placeholder="user name" id="uname">
+                <i class="fa-regular fa-circle-check"></i>
+                <i class="fa-solid fa-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+        
+            <div class="form-box">
+                <label>Email</label>
+                <input type="mail" placeholder="abc@gmail.com" id="mail">
+                <i class="fa-regular fa-circle-check"></i>
+                <i class="fa-solid fa-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+       
+            <div class="form-box">
+                <label>Password</label>
+                <input type="password" placeholder="password" id="pass"> 
+                <i class="fa-regular fa-circle-check"></i>
+                <i class="fa-solid fa-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+        
+            <div class="form-box">
+                <label>Confirm password</label>
+                <input type="password" placeholder="confirm password" id="pass2">
+                <i class="fa-regular fa-circle-check"></i>
+                <i class="fa-solid fa-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+            <button>submit</button>
+            </form>
+      
+    </div>
+    <script>
+          const form =document.getElementById('form');
+          const username =document.getElementById('uname');
+          const mail =document.getElementById('mail');
+          const pass =document.getElementById('pass');
+          const pass2 =document.getElementById('pass2');
+           
+          form.addEventListener('submit',e =>{
+              e.preventDefault();
+              checkInput();
+
+          });
+
+          function checkInput(){
+               const usernameValue = username.value.trim();
+               const mailValue = mail.value.trim();
+               const passValue= pass.value.trim();
+               const pass2Value = pass2.value.trim();
+
+
+               if(usernameValue ==='')
+               {
+                setError(username,"username can't be blank");
+               }
+               else{
+                setSuccess(username);
+               }
+
+               if(mailValue ==='')
+               {
+                setError(mail,"mail can't be blank");
+               }
+               else if(!isMail(mailValue))
+               {
+                setError(mail,"mailId is not valid");
+               }
+               else{
+                setSuccess(mail);
+               }
+
+               if(passValue ==='')
+               {
+                setError(pass,"password can't be blank");
+               }
+               else{
+                setSuccess(pass);
+               }
+
+               if(pass2Value ==='')
+               {
+                setError(pass2,"password can't be blank");
+               }
+               else if(passValue !== pass2Value)
+               {
+                setError(pass2,"password doesn't match");
+               }
+               else{
+                setSuccess(pass2);
+               }
+          }
+          function setError(input,message)
+          {
+            const formControl = input.parentElement;
+            const small   = formControl.querySelector('small');
+            formControl.className = 'form-box error';
+            small.innerText = message;
+          }
+          function setSuccess(input,message)
+          {
+            const formControl = input.parentElement;
+            formControl.className = 'form-box success';
+          }
+
+
+
+          function isMail(mail)
+          {
+            return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail);
+          }
+
+
+
+
+    </script>
+    
+    
+</body>
+</html> 
